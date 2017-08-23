@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Versus from './Versus';
+import Stalker from './Stalker';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Versus />, document.getElementById('root'));
+ReactDOM.render(<Stalker />, document.getElementById('root'));
 registerServiceWorker();
