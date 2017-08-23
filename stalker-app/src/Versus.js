@@ -58,7 +58,7 @@ export default class Versus extends Component {
         <input
           type="button"
           value="Battle!!!!!"
-          onClick={()=>battle(player1, player2)}
+          onClick={()=>this.battle(player1, player2)}
         />
       </div>)
   }
