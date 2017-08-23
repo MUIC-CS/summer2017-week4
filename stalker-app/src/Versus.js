@@ -31,12 +31,20 @@ export default class Versus extends Component {
     this.setState({player1: newName})
   }
 
+  onPlayer2NameChange(newName) {
+    this.setState({player2: newName})
+  }
+
   render() {
     return (
       <div>
         <NameBox
           name={this.state.player1}
           onNameChange={(n)=>this.onPlayer1NameChange(n)}
+        />
+        <NameBox
+          name={this.state.player2}
+          onNameChange={(n)=>this.onPlayer2NameChange(n)}
         />
       </div>)
   }
