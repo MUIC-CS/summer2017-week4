@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
-function AnyReactComponent({ text }) {
+function Prey({ name }) {
   const style = {
     position: 'absolute',
     background:'red',
@@ -12,7 +12,7 @@ function AnyReactComponent({ text }) {
     return (<div
         style={style}
       >
-        {text}
+        {name}
       </div>);
 }
 
@@ -23,16 +23,15 @@ class SimpleMap extends Component {
   };
 
   render() {
+    const {prey} = this.props
     return (
       <GoogleMapReact
         defaultCenter={this.props.center}
         defaultZoom={this.props.zoom}
       >
-        <AnyReactComponent
-          lat={13.7563}
-          lng={100.5018}
-          text={'Kreyser Avrora'}
-        />
+        {Object.keys(prey).map(name => {
+          return <Prey name={name} lat={prey[name].lat} lng = {prey[name].lng} />
+        })}
       </GoogleMapReact>
     );
   }
@@ -40,9 +39,13 @@ class SimpleMap extends Component {
 
 export default class Stalker extends Component {
   render() {
+    const prey = {
+      'New': {lat: 13.7663, lng: 100.5018},
+      'Bossy': {lat: 13.7663, lng: 100.7018}
+    }
     return (
       <div style={{height: 500, width: 500}}>
-        <SimpleMap />
+        <SimpleMap prey={prey}/>
       </div>
     )
   }
