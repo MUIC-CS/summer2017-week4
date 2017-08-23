@@ -1,0 +1,26 @@
+version: '2'
+services:
+  web:
+    build: ./stalker-flask
+
+  frontend:
+    build: ./stalker-app
+    volumes:
+      - ./www:/web/build
+
+  webserver:
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./www:/var/www/html
+
+    links:
+      - web
+
+    depends_on:
+      - web
+      - frontend
