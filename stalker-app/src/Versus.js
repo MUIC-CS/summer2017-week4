@@ -23,7 +23,8 @@ export default class Versus extends Component {
     super(props)
     this.state = {
       player1: '',
-      player2: ''
+      player2: '',
+      battleResult: null
     }
   }
 
@@ -33,6 +34,13 @@ export default class Versus extends Component {
 
   onPlayer2NameChange(newName) {
     this.setState({player2: newName})
+  }
+
+  battle(player1, player2) {
+    //{player1: player1, player2: player2}
+    axios.post('/versus', {player1, player2}).then(res => {
+      console.log(res.data)
+    })
   }
 
   render() {
@@ -46,6 +54,7 @@ export default class Versus extends Component {
           name={this.state.player2}
           onNameChange={(n)=>this.onPlayer2NameChange(n)}
         />
+        <input type="button" value="Battle!!!!!"/>
       </div>)
   }
 }
