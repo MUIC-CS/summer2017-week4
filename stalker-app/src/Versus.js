@@ -44,6 +44,7 @@ export default class Versus extends Component {
   }
 
   render() {
+    const {player1, player2} = this.state
     return (
       <div>
         <NameBox
@@ -54,7 +55,11 @@ export default class Versus extends Component {
           name={this.state.player2}
           onNameChange={(n)=>this.onPlayer2NameChange(n)}
         />
-        <input type="button" value="Battle!!!!!"/>
+        <input
+          type="button"
+          value="Battle!!!!!"
+          onClick={()=>battle(player1, player2)}
+        />
       </div>)
   }
 }
