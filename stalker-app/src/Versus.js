@@ -17,6 +17,14 @@ function NameBox({name, onNameChange}) {
   )
 }
 
+function BattleResult({result}) {
+  console.log(result)
+  if(result) {
+    return (<div> Winner is {result.winner.name} </div>)
+  } else {
+    return null
+  }
+}
 
 export default class Versus extends Component {
   constructor(props){
@@ -40,6 +48,7 @@ export default class Versus extends Component {
     //{player1: player1, player2: player2}
     axios.post('/versus', {player1, player2}).then(res => {
       console.log(res.data)
+      this.setState({battleResult: res.data})
     })
   }
 
@@ -60,6 +69,7 @@ export default class Versus extends Component {
           value="Battle!!!!!"
           onClick={()=>this.battle(player1, player2)}
         />
+        <BattleResult result={this.state.battleResult}/>
       </div>)
   }
 }
