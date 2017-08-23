@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-
+import axios from 'axios'
 function Prey({ name }) {
   const style = {
     position: 'absolute',
@@ -38,11 +38,25 @@ class SimpleMap extends Component {
 }
 
 export default class Stalker extends Component {
-  render() {
-    const prey = {
-      'New': {lat: 13.7663, lng: 100.5018},
-      'Bossy': {lat: 13.7663, lng: 100.7018}
+  constructor(props){
+    super(props)
+    this.state = {
+      prey : {}
     }
+  }
+
+  updatePrey() {
+    axios.get('/prey-list').then(res => {
+      this.setState({prey: res.data})
+    })
+  }
+
+  componentDidMount() {
+    this.updatePrey()
+  }
+
+  render() {
+    const {prey} = this.state
     return (
       <div style={{height: 500, width: 500}}>
         <SimpleMap prey={prey}/>

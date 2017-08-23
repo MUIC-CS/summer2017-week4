@@ -29,6 +29,18 @@ def versus():
         "loser": {"name": loser, "score": hash(loser)},
     })
 
+prey_db = {
+    'Nice': {"lat": 13.7963, "lng": 100.5018},
+    'New': {"lat": 13.7663, "lng": 100.5018},
+    'Bossy': {"lat": 13.7663, "lng": 100.7018},
+    'Bright':  {"lat": 13.5663, "lng": 100.7018}
+}
+
+
+@app.route('/prey-list')
+def prey_list():
+    return jsonify(prey_db)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
