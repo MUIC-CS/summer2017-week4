@@ -42,5 +42,14 @@ def prey_list():
     return jsonify(prey_db)
 
 
+@app.route('/add-prey', methods=["POST"])
+def add_prey():
+    name = request.json['name']
+    lat = request.json['lat']
+    lng = request.json['lng']
+    prey_db[name] = {"lat": lat, "lng": lng}
+    return jsonify({"status": "OK"})
+
+
 if __name__ == '__main__':
     app.run(debug=True)

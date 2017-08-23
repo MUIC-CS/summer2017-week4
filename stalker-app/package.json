@@ -5,6 +5,7 @@
   "proxy": "http://localhost:5000",
   "dependencies": {
     "axios": "^0.16.2",
+    "chance": "^1.0.10",
     "google-map-react": "^0.24.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

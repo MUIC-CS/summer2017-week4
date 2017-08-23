@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import axios from 'axios'
+const chance = require('chance').Chance();
+
 function Prey({ name }) {
   const style = {
     position: 'absolute',
     background:'red',
     color:'white',
     padding: 10,
-    borderRadius: 10
+    borderRadius: 10,
+    opacity: 0.7
   }
     return (<div
         style={style}
@@ -28,6 +31,7 @@ class SimpleMap extends Component {
       <GoogleMapReact
         defaultCenter={this.props.center}
         defaultZoom={this.props.zoom}
+        onClick = {this.props.onMapClick}
       >
         {Object.keys(prey).map(name => {
           return <Prey name={name} lat={prey[name].lat} lng = {prey[name].lng} />
@@ -51,6 +55,14 @@ export default class Stalker extends Component {
     })
   }
 
+  onMapClick({x, y, lat, lng, ev}) {
+    console.log(lat, lng)
+    const name = chance.name()
+    axios.post('/add-prey', {name, lat, lng}).then(res => {
+      this.updatePrey()
+    })
+  }
+
   componentDidMount() {
     this.updatePrey()
   }
@@ -59,7 +71,7 @@ export default class Stalker extends Component {
     const {prey} = this.state
     return (
       <div style={{height: 500, width: 500}}>
-        <SimpleMap prey={prey}/>
+        <SimpleMap prey={prey} onMapClick={this.onMapClick.bind(this)}/>
       </div>
     )
   }
