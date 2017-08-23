@@ -2,7 +2,18 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
 function AnyReactComponent({ text }) {
-    return <div>{text}</div>;
+  const style = {
+    position: 'absolute',
+    background:'red',
+    color:'white',
+    padding: 10,
+    borderRadius: 10
+  }
+    return (<div
+        style={style}
+      >
+        {text}
+      </div>);
 }
 
 class SimpleMap extends Component {
